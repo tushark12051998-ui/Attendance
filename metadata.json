@@ -1,0 +1,6 @@
+{
+  "name": "Attendance, Overtime, and Headcount Tracker",
+  "description": "A high-fidelity shop floor attendance, overtime, and headcount planning resource tracker designed for industrial manufacturing environments with robust analytics and data persistence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

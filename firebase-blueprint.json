@@ -1,0 +1,77 @@
+{
+  "entities": {
+    "Associate": {
+      "title": "Associate",
+      "description": "An employee roster entry on the shop floor",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "department": { "type": "string" },
+        "station": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "Inactive"] },
+        "skill": { "type": "string", "enum": ["Operator", "Helper"] }
+      },
+      "required": ["id", "name", "department", "status", "skill"]
+    },
+    "AttendanceRecord": {
+      "title": "AttendanceRecord",
+      "description": "An individual worker shift attendance entry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string" },
+        "shift": { "type": "string" },
+        "associateId": { "type": "string" },
+        "isPresent": { "type": "boolean" },
+        "overtimeHours": { "type": "number" }
+      },
+      "required": ["id", "date", "shift", "associateId", "isPresent", "overtimeHours"]
+    },
+    "HeadcountPlan": {
+      "title": "HeadcountPlan",
+      "description": "Shift production capacity and labor requirements plan",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string" },
+        "shift": { "type": "string" },
+        "plannedHeadcount": { "type": "number" },
+        "useOverride": { "type": "boolean" },
+        "varianceNotes": { "type": "string" },
+        "stationPlans": { "type": "object" }
+      },
+      "required": ["id", "date", "shift", "plannedHeadcount"]
+    },
+    "SystemConfig": {
+      "title": "SystemConfig",
+      "description": "Global settings including shifts, stations, departments and branding",
+      "type": "object",
+      "properties": {
+        "orgName": { "type": "string" },
+        "departments": { "type": "array" },
+        "stations": { "type": "array" },
+        "shifts": { "type": "array" }
+      },
+      "required": ["orgName"]
+    }
+  },
+  "firestore": {
+    "/associates/{associateId}": {
+      "schema": "Associate",
+      "description": "Roster of shop floor employees"
+    },
+    "/attendance/{attendanceId}": {
+      "schema": "AttendanceRecord",
+      "description": "History of shift attendance logs"
+    },
+    "/plans/{planId}": {
+      "schema": "HeadcountPlan",
+      "description": "Capacity and headcount requirements planning by date and shift"
+    },
+    "/config/{configId}": {
+      "schema": "SystemConfig",
+      "description": "System preferences and configurations"
+    }
+  }
+}
